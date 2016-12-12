@@ -3,11 +3,23 @@
 ## Products
 
 ```
-<product> <id>44162d90-9315-4acc-980e-cf975c6b9397</id> <name>PICEA MARIANA RESIN</name> <producer>Zooxo</producer> <weight>11A</weight> <price>77.92</price>
+<product>
+  <id>44162d90-9315-4acc-980e-cf975c6b9397</id>
+  <name>PICEA MARIANA RESIN</name>
+  <producer>Zooxo</producer>
+  <weight>11A</weight> 
+  <price>77.92</price>
+</product> 
 ```
 
 ```
-</product> <product> <id>66968a93-4ec6-4fa2-bf2d-3b0f59e56738</id> <name>Ursodiol</name> <producer>Mudo</producer> <weight>4.5</weight> <price>17.18</price> </product>
+<product>
+  <id>66968a93-4ec6-4fa2-bf2d-3b0f59e56738</id>
+  <name>Ursodiol</name>
+  <producer>Mudo</producer>
+  <weight>4.5</weight>
+  <price>17.18</price>
+</product>
 ```
 
 ```
