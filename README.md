@@ -2,11 +2,11 @@
 
 ## BPMN-Process
 
-### Sychronus
+### Synchronous
 
 ![alt tag](https://github.com/Bariumm/BPM-Lab/blob/master/BPNM-Sync.jpg)
 
-### Asynchronus
+### Asynchronous
 
 ![alt tag](https://github.com/Bariumm/BPM-Lab/blob/master/BPNM-Async.jpg)
 
@@ -87,7 +87,7 @@
 </tns:FlowSOGProcessRequest>
 ```
 
-### Asynchron
+### Asynchronous
 
 ```
  <tns:WebShopAsyncRequest xmlns:tns="http://iaas.uni-stuttgart.de/labs/FlowSOG" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> 
