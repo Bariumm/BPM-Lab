@@ -55,6 +55,8 @@
 
 ## Example
 
+### Normal
+
 ```
 <tns:FlowSOGProcessRequest xmlns:tns="http://iaas.uni-stuttgart.de/labs/FlowSOG" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <tns:products>
@@ -73,4 +75,9 @@
   </tns:paymentDetails>
   <tns:status>tns:status</tns:status>
 </tns:FlowSOGProcessRequest>
+```
+
+### Asynchron
+
+```
 ```
