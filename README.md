@@ -68,7 +68,7 @@
   <tns:customerID>1111</tns:customerID>
   <tns:shippingAddress>Stuttgart</tns:shippingAddress>
   <tns:paymentDetails>
-    <tns:bankName>BWB</tns:bankName>
+    <tns:bankName>BW Bank</tns:bankName>
     <tns:bankAddress>Stuttgart</tns:bankAddress>
     <tns:accountNumber>2222</tns:accountNumber>
     <tns:accountHolderName>Max</tns:accountHolderName>
@@ -83,17 +83,17 @@
  <tns:WebShopAsyncRequest xmlns:tns="http://iaas.uni-stuttgart.de/labs/FlowSOG" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> 
   <tns:products> 
     <tns:product> 
-      <tns:productID>44162d90-9315-4acc-980e-cf975c6b9397</tns:productID> 
-      <tns:numberOfItems>1</tns:numberOfItems> 
+      <tns:productID>1d1d5dcf-de65-44d7-bda3-7a25ee222bde</tns:productID> 
+      <tns:numberOfItems>10</tns:numberOfItems> 
     </tns:product> 
   </tns:products> 
-  <tns:customerID>1234</tns:customerID> 
-  <tns:shippingAddress>Heilbronn</tns:shippingAddress> 
+  <tns:customerID>1111</tns:customerID> 
+  <tns:shippingAddress>Stuttgart</tns:shippingAddress> 
   <tns:paymentDetails> 
-    <tns:bankName>Deutsche Bank</tns:bankName> 
-    <tns:bankAddress>Muellerweg 1</tns:bankAddress> 
-    <tns:accountNumber>007 1337</tns:accountNumber> 
-    <tns:accountHolderName>Peter Wurst</tns:accountHolderName> 
+    <tns:bankName>BW Bank</tns:bankName> 
+    <tns:bankAddress>Stuttgart</tns:bankAddress> 
+    <tns:accountNumber>2222</tns:accountNumber> 
+    <tns:accountHolderNameMax</tns:accountHolderName> 
   </tns:paymentDetails> 
   <tns:status>tns:status</tns:status> 
   <tns:callbackUrl>http://localhost:32890/ode/processes/WebShopAsyncCallback</tns:callbackUrl> 
