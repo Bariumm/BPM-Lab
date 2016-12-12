@@ -23,15 +23,33 @@
 ```
 
 ```
-<product> <id>479e8b20-3697-4609-9ed6-bde2a4b22e41</id> <name>Potassium Chloride</name> <producer>Zoomcast</producer> <weight>12.1</weight> <price>94.05</price> </product>
+<product>
+  <id>479e8b20-3697-4609-9ed6-bde2a4b22e41</id>
+  <name>Potassium Chloride</name>
+  <producer>Zoomcast</producer>
+  <weight>12.1</weight>
+  <price>94.05</price>
+</product>
 ```
 
 ```
-<product> <id>3bae3778-8577-4b36-9572-a0b020931ba5</id> <name>Menthol, Methyl Salicylate</name> <producer>Yozio</producer> <weight>10.8</weight> <price>32.28</price>
+<product>
+  <id>3bae3778-8577-4b36-9572-a0b020931ba5</id>
+  <name>Menthol, Methyl Salicylate</name>
+  <producer>Yozio</producer>
+  <weight>10.8</weight>
+  <price>32.28</price>
+</product>
 ```
 
 ```
-</product> <product> <id>1d1d5dcf-de65-44d7-bda3-7a25ee222bde</id> <name>Robitussin Sugar Free Cough</name> <producer>0yondu</producer> <weight>3.5</weight> <price>12.14</price> </product>
+<product>
+  <id>1d1d5dcf-de65-44d7-bda3-7a25ee222bde</id>
+  <name>Robitussin Sugar Free Cough</name>
+  <producer>0yondu</producer>
+  <weight>3.5</weight>
+  <price>12.14</price>
+</product>
 ```
 
 
