@@ -4,7 +4,11 @@
 
 ### Sychronus
 
+![alt tag](https://github.com/Bariumm/BPM-Lab/blob/master/BPNM-Sync.jpg)
+
 ### Asynchronus
+
+![alt tag](https://github.com/Bariumm/BPM-Lab/blob/master/BPNM-Async.jpg)
 
 ## Products
 
