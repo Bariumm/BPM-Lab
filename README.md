@@ -103,7 +103,7 @@
     <tns:bankName>BW Bank</tns:bankName> 
     <tns:bankAddress>Stuttgart</tns:bankAddress> 
     <tns:accountNumber>2222</tns:accountNumber> 
-    <tns:accountHolderNameMax</tns:accountHolderName> 
+    <tns:accountHolderName>Max</tns:accountHolderName> 
   </tns:paymentDetails> 
   <tns:status>tns:status</tns:status> 
   <tns:callbackUrl>http://localhost:33130/ode/processes/WebShopAsyncCallback</tns:callbackUrl> 
