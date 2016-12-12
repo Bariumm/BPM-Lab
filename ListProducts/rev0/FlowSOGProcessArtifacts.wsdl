@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://iaas.uni-stuttgart.de/labs/FlowSOG" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" name="FlowSOGProcess" targetNamespace="http://iaas.uni-stuttgart.de/labs/FlowSOG">
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     TYPE DEFINITION - List of types participating in this BPEL process 
+     The BPEL Designer will generate default request and response types
+     but you can define or import any XML Schema type and use them as part 
+     of the message types.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="InventoryPLT">
+    <plnk:role name="InventoryProvider" portType="tns:InventoryPortType"/>
+  </plnk:partnerLinkType>
+    <import location="FlowSOGServices.wsdl" namespace="http://iaas.uni-stuttgart.de/labs/FlowSOG"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://iaas.uni-stuttgart.de/labs/FlowSOG">
+
+            <element name="FlowSOGProcessRequest">
+                <complexType>
+                    <sequence>
+                        <element name="numberOfItems" type="int"/>
+                    </sequence>
+                </complexType>
+            </element>
+
+            <element name="FlowSOGProcessResponse">
+                <complexType>
+                    <sequence>
+
+
+                    	<element name="productList"
+                    		type="tns:productList">
+                    	</element>
+
+                    </sequence>
+                </complexType>
+            </element>
+        
+            <complexType name="productList">
+            	<sequence>
+            		<element name="product" type="tns:product" maxOccurs="unbounded" minOccurs="0"></element>
+            	</sequence>
+            </complexType>
+        
+            <complexType name="product">
+            	<sequence>
+            		<element name="id" type="string" maxOccurs="1"
+            			minOccurs="1">
+            		</element>
+            		<element name="name" type="string" maxOccurs="1"
+            			minOccurs="0">
+            		</element>
+            		<element name="producer" type="string" maxOccurs="1"
+            			minOccurs="0">
+            		</element>
+            		<element name="weight" type="decimal" maxOccurs="1"
+            			minOccurs="0">
+            		</element>
+            		<element name="price" type="decimal" maxOccurs="1"
+            			minOccurs="0">
+            		</element>
+            		<element name="status" type="tns:productStatus"
+            			maxOccurs="1" minOccurs="0">
+            		</element>
+            	</sequence>
+            	<anyAttribute></anyAttribute>
+            </complexType>
+            
+            <complexType name="productStatus">
+            	<sequence>
+            		<element name="currentAvailability"
+            			type="tns:currentAvailabilityType" maxOccurs="1"
+            			minOccurs="1">
+            		</element>
+            		<element name="availableAgainInDays" type="int" maxOccurs="1" minOccurs="0"></element>
+            	</sequence>
+            	<anyAttribute></anyAttribute>
+            </complexType>
+        
+        
+            <simpleType name="currentAvailabilityType">
+            	<restriction base="string"></restriction>
+            </simpleType>
+        </schema>
+    </types>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     MESSAGE TYPE DEFINITION - Definition of the message types used as 
+     part of the port type defintions
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <message name="FlowSOGProcessRequestMessage">
+        <part element="tns:FlowSOGProcessRequest" name="payload"/>
+    </message>
+    <message name="FlowSOGProcessResponseMessage">
+        <part element="tns:FlowSOGProcessResponse" name="payload"/>
+    </message>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PORT TYPE DEFINITION - A port type groups a set of operations into
+     a logical service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+
+    <!-- portType implemented by the FlowSOGProcess BPEL process -->
+    <portType name="FlowSOGProcess">
+        <operation name="process">
+            <input message="tns:FlowSOGProcessRequestMessage"/>
+            <output message="tns:FlowSOGProcessResponseMessage"/>
+        </operation>
+    </portType>   
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PARTNER LINK TYPE DEFINITION
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="FlowSOGProcess">
+        <plnk:role name="FlowSOGProcessProvider" portType="tns:FlowSOGProcess"/>
+    </plnk:partnerLinkType>
+    
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     BINDING DEFINITION - Defines the message format and protocol details
+     for a web service.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <binding name="FlowSOGProcessBinding" type="tns:FlowSOGProcess">
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    	<operation name="process">
+    		<soap:operation soapAction="http://iaas.uni-stuttgart.de/labs/FlowSOG/process"/>
+    		<input>
+    			<soap:body use="literal"/>
+    		</input>
+    		<output>
+    			<soap:body use="literal"/>
+    		</output>
+    	</operation>
+    </binding>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     SERVICE DEFINITION - A service groups a set of ports into
+     a service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <service name="FlowSOGProcessService">
+    	<port binding="tns:FlowSOGProcessBinding" name="FlowSOGProcessPort">
+    		<soap:address location="http://localhost:8080/ode/processes/FlowSOGProcess"/>
+    	</port>
+    </service>
+</definitions>
