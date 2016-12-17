@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://iaas.uni-stuttgart.de/labs/FlowSOG" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="WebShopAsync" targetNamespace="http://iaas.uni-stuttgart.de/labs/FlowSOG">
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     TYPE DEFINITION - List of types participating in this BPEL process 
+     The BPEL Designer will generate default request and response types
+     but you can define or import any XML Schema type and use them as part 
+     of the message types.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="InventoryPLT">
+    <plnk:role name="InventoryPLProvider" portType="tns:InventoryPortType"/>
+    <plnk:role name="InventoryPLRequester" portType="tns:InventoryCallbackPortType"/>
+  </plnk:partnerLinkType>
+    <vprop:property name="Inventory" type="xsd:string"/>
+    <vprop:propertyAlias messageType="tns:checkAvailabilityAsyncInput" part="checkAvailabilityAsyncInput" propertyName="tns:Inventory">
+    <vprop:query><![CDATA[/tns:customerId]]></vprop:query>
+  </vprop:propertyAlias>
+    <vprop:propertyAlias messageType="tns:onFinishCheckAvailabilityInput" part="onFinishCheckAvailabilityInput" propertyName="tns:Inventory">
+    <vprop:query><![CDATA[/tns:customerId]]></vprop:query>
+  </vprop:propertyAlias>
+    <plnk:partnerLinkType name="OrderPLT">
+    <plnk:role name="OrderProvider" portType="tns:OrderPortType"/>
+  </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="ShipmentPLT">
+    <plnk:role name="ShipmentProvider" portType="tns:ShipmentPortType"/>
+  </plnk:partnerLinkType>
+    <plnk:partnerLinkType name="PaymentPLT">
+    <plnk:role name="PaymentProvider" portType="tns:PaymentPortType"/>
+  </plnk:partnerLinkType>
+    <import location="FlowSOG.wsdl" namespace="http://iaas.uni-stuttgart.de/labs/FlowSOG"/>
+    <types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://iaas.uni-stuttgart.de/labs/FlowSOG">
+
+            <element name="WebShopAsyncRequest">
+                <complexType>
+                	<sequence>
+                		<element maxOccurs="unbounded" minOccurs="1" name="products" type="tns:productsType">
+                		</element>
+                		<element name="customerID" type="string"/>
+                		<element name="shippingAddress" type="string"/>
+                		<element name="paymentDetails" type="tns:paymentDetailsType">
+                		</element>
+                		<element maxOccurs="1" minOccurs="0" name="status" type="tns:statusType">
+                		</element>
+
+
+                		<element name="callbackUrl" type="string"/>
+                	</sequence>
+                	<anyAttribute/>
+                </complexType>
+            </element>
+
+            <element name="WebShopAsyncResponse">
+                <complexType>
+                	<sequence>
+
+                		<element name="customerID" type="string" />
+                		<element maxOccurs="1" minOccurs="0"
+                			name="orderID" type="string">
+                		</element>
+                		<element name="shippingAddress" type="string" />
+                		<element name="paymentDetails"
+                			type="tns:paymentDetailsType">
+                		</element>
+
+                		<element name="costs" type="double" />
+                		<element name="products"
+                			type="tns:productsType" />
+                		<element maxOccurs="1" minOccurs="0"
+                			name="paymentStatus" type="tns:statusType">
+                		</element>
+                		<element name="shipmentStatus"
+                			type="tns:statusType" maxOccurs="1" minOccurs="0">
+                		</element>
+
+                		<element name="availableStatus"
+                			type="tns:statusType" maxOccurs="1" minOccurs="0">
+                		</element>
+                	</sequence>
+                	<anyAttribute/>
+                </complexType>
+            </element>
+        
+            <complexType name="productsType">
+            	<sequence>
+            		<element maxOccurs="unbounded" minOccurs="1" name="product" type="tns:productType">
+            		</element>
+            	</sequence>
+            	<anyAttribute/>
+            </complexType>
+
+            <complexType name="paymentDetailsType">
+            	<sequence>
+            		<element name="bankName" type="string"/>
+            		<element name="bankAddress" type="string"/>
+            		<element name="accountNumber" type="string"/>
+            		<element name="accountHolderName" type="string"/>
+            	</sequence>
+            	<anyAttribute/>
+            </complexType>
+            
+        
+            <complexType name="productType">
+            	<sequence>
+            		<element name="productID" type="string"/>
+            		<element name="numberOfItems" type="int"/>
+            	</sequence>
+            	<anyAttribute/>
+            </complexType>
+
+            <simpleType name="statusType">
+            	<restriction base="string"/>
+            </simpleType>
+        </schema>
+    </types>
+
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     MESSAGE TYPE DEFINITION - Definition of the message types used as 
+     part of the port type defintions
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <message name="WebShopAsyncRequestMessage">
+        <part element="tns:WebShopAsyncRequest" name="payload"/>
+    </message>
+    <message name="WebShopAsyncResponseMessage">
+        <part element="tns:WebShopAsyncResponse" name="payload"/>
+    </message>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PORT TYPE DEFINITION - A port type groups a set of operations into
+     a logical service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+
+    <!-- portType implemented by the WebShopAsync BPEL process -->
+    <portType name="WebShopAsync">
+        <operation name="process">
+            <input message="tns:WebShopAsyncRequestMessage"/>
+            <output message="tns:WebShopAsyncResponseMessage"/>
+        </operation>
+    </portType>   
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     PARTNER LINK TYPE DEFINITION
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->    
+    <plnk:partnerLinkType name="WebShopAsync">
+        <plnk:role name="WebShopAsyncProvider" portType="tns:WebShopAsync"/>
+    </plnk:partnerLinkType>
+    
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     BINDING DEFINITION - Defines the message format and protocol details
+     for a web service.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <binding name="WebShopAsyncBinding" type="tns:WebShopAsync">
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    	<operation name="process">
+    		<soap:operation soapAction="http://iaas.uni-stuttgart.de/labs/FlowSOG/process"/>
+    		<input>
+    			<soap:body use="literal"/>
+    		</input>
+    		<output>
+    			<soap:body use="literal"/>
+    		</output>
+    	</operation>
+    </binding>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     SERVICE DEFINITION - A service groups a set of ports into
+     a service unit.
+     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <service name="WebShopAsyncService">
+    	<port binding="tns:WebShopAsyncBinding" name="WebShopAsyncPort">
+    		<soap:address location="http://localhost:8080/ode/processes/WebShopAsync"/>
+    	</port>
+    </service>
+
+</definitions>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpdb:Debug xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:bpdb="http://simtech.de/bpel/debug" processName="WebShopAsync" processPath="C:\Users\Tim\Desktop\eclipse_win64\workspace2\BPMLab_03\rev0\WebShopAsync.bpel">
+  <globalBreakpoints/>
+  <localBreakpoints/>
+</bpdb:Debug>
