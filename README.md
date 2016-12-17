@@ -1,4 +1,4 @@
-# BPM-Lab Group 14
+# University Stuttgart IAAS BPM-Lab Group 14
 
 ## BPMN-Process
 
